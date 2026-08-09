@@ -40,14 +40,15 @@ const Register = () => {
   return (
     <div className="auth-page">
       <div className="glass-container auth-card">
-        <h1 className="auth-title">TripVault</h1>
-        <p className="auth-subtitle">Create an account to start your journey.</p>
+        <div className="auth-header-icon">🌍</div>
+        <h1 className="auth-title gradient-text">Join TripVault</h1>
+        <p className="auth-subtitle">Create an account to start your adventure journal.</p>
         
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">⚠️ {error}</div>}
         
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label className="form-label" htmlFor="name">Name</label>
+            <label className="form-label" htmlFor="name">Full Name</label>
             <input 
               type="text" 
               id="name"
@@ -56,11 +57,11 @@ const Register = () => {
               onChange={onChange} 
               className="form-input" 
               required 
-              placeholder="Enter your name"
+              placeholder="Alex Johnson"
             />
           </div>
           <div className="form-group">
-            <label className="form-label" htmlFor="email">Email address</label>
+            <label className="form-label" htmlFor="email">Email Address</label>
             <input 
               type="email" 
               id="email"
@@ -69,7 +70,7 @@ const Register = () => {
               onChange={onChange} 
               className="form-input" 
               required 
-              placeholder="Enter your email"
+              placeholder="alex@example.com"
             />
           </div>
           <div className="form-group">
@@ -82,11 +83,11 @@ const Register = () => {
               onChange={onChange} 
               className="form-input" 
               required 
-              placeholder="Create a password"
+              placeholder="Create a strong password"
             />
           </div>
-          <button type="submit" className="btn" disabled={loading}>
-            {loading ? 'Creating Account...' : 'Sign Up'}
+          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
+            {loading ? 'Creating Account...' : 'Create Account →'}
           </button>
         </form>
         

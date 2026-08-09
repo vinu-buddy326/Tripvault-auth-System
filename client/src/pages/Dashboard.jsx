@@ -1,13 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
+import TripCard from '../components/TripCard';
+import TripForm from '../components/TripForm';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [trips, setTrips] = useState([]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingTrip, setEditingTrip] = useState(null);
   
   const navigate = useNavigate();
+
+  const fetchTrips = async () => {
+    try {
+      const res = await api.get('/trips');
+      setTrips(res.data);
+    } catch (err) {
+      console.error('Failed to fetch trips', err);
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -18,16 +32,12 @@ const Dashboard = () => {
           return;
         }
 
-        const res = await axios.get('http://localhost:5000/api/auth/me', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        
+        const res = await api.get('/auth/me');
         setUser(res.data);
+        await fetchTrips();
       } catch (err) {
         console.error(err);
-        setError('Failed to fetch user data. Please try logging in again.');
+        setError('Failed to fetch user data. Please log in again.');
         localStorage.removeItem('token');
         navigate('/login');
       } finally {
@@ -38,31 +48,116 @@ const Dashboard = () => {
     fetchUser();
   }, [navigate]);
 
+  const handleCreateNew = () => {
+    setEditingTrip(null);
+    setIsFormOpen(true);
+  };
+
+  const handleEdit = (trip) => {
+    setEditingTrip(trip);
+    setIsFormOpen(true);
+  };
+
+  const handleFormSuccess = () => {
+    setIsFormOpen(false);
+    setEditingTrip(null);
+    fetchTrips();
+  };
+
+  const handleFormCancel = () => {
+    setIsFormOpen(false);
+    setEditingTrip(null);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
 
+  const getInitial = (name) => {
+    return name ? name.charAt(0).toUpperCase() : 'U';
+  };
+
   if (loading) {
     return (
       <div className="auth-page">
-        <div className="auth-title">Loading...</div>
+        <div className="glass-container auth-card" style={{ textAlign: 'center', padding: '3rem' }}>
+          <div className="empty-state-icon">🌍</div>
+          <h2 className="gradient-text">Loading TripVault...</h2>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="dashboard-container">
+      {/* Top Navbar */}
       <header className="dashboard-header">
-        <div className="dashboard-title">TripVault</div>
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+        <div className="logo-brand">
+          <div className="logo-icon">✈️</div>
+          <span className="dashboard-title gradient-text">TripVault</span>
+        </div>
+
+        <div className="user-badge-group">
+          {user && (
+            <div className="user-avatar-chip">
+              <div className="avatar-circle">{getInitial(user.name)}</div>
+              <span className="user-name-text">{user.name}</span>
+            </div>
+          )}
+          <button onClick={handleLogout} className="btn-danger">
+            Logout
+          </button>
+        </div>
       </header>
       
-      <main className="glass-container dashboard-content">
-        <h2>Welcome back, {user?.name}!</h2>
-        <p>This is your travel memory journal dashboard. More features coming soon.</p>
+      {/* Main Content Area */}
+      <main>
+        <div className="dashboard-hero-bar">
+          <div className="hero-welcome">
+            <h2>Welcome back, <span className="gradient-text-cyan">{user?.name}</span>! 👋</h2>
+            <p>Your personal travel memory vault & adventure journal.</p>
+          </div>
+          {!isFormOpen && (
+            <button onClick={handleCreateNew} className="btn-primary">
+              ✨ Add New Trip
+            </button>
+          )}
+        </div>
         
-        {error && <div className="error-message" style={{marginTop: '2rem'}}>{error}</div>}
+        {error && <div className="error-message">{error}</div>}
+
+        {isFormOpen ? (
+          <TripForm 
+            trip={editingTrip} 
+            onSuccess={handleFormSuccess} 
+            onCancel={handleFormCancel} 
+          />
+        ) : (
+          <div className="trips-section">
+            {trips.length === 0 ? (
+              <div className="empty-state">
+                <div className="empty-state-icon">🗺️</div>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>No trips added yet</h3>
+                <p>Start documenting your travel memories! Add your first destination to build your personal memory journal.</p>
+                <button onClick={handleCreateNew} className="btn-primary">
+                  ✈️ Add Your First Trip
+                </button>
+              </div>
+            ) : (
+              <div className="trips-grid">
+                {trips.map((trip) => (
+                  <TripCard 
+                    key={trip._id} 
+                    trip={trip} 
+                    onEdit={handleEdit} 
+                    onDeleteSuccess={fetchTrips} 
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </main>
     </div>
   );

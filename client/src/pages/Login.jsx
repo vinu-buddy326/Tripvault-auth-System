@@ -38,14 +38,15 @@ const Login = () => {
   return (
     <div className="auth-page">
       <div className="glass-container auth-card">
-        <h1 className="auth-title">Welcome Back</h1>
-        <p className="auth-subtitle">Log in to your TripVault account.</p>
+        <div className="auth-header-icon">✈️</div>
+        <h1 className="auth-title gradient-text">Welcome Back</h1>
+        <p className="auth-subtitle">Log in to manage your TripVault memories.</p>
         
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">⚠️ {error}</div>}
         
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label className="form-label" htmlFor="email">Email address</label>
+            <label className="form-label" htmlFor="email">Email Address</label>
             <input 
               type="email" 
               id="email"
@@ -54,7 +55,7 @@ const Login = () => {
               onChange={onChange} 
               className="form-input" 
               required 
-              placeholder="Enter your email"
+              placeholder="name@example.com"
             />
           </div>
           <div className="form-group">
@@ -67,16 +68,16 @@ const Login = () => {
               onChange={onChange} 
               className="form-input" 
               required 
-              placeholder="Enter your password"
+              placeholder="••••••••"
             />
           </div>
-          <button type="submit" className="btn" disabled={loading}>
-            {loading ? 'Logging In...' : 'Log In'}
+          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
+            {loading ? 'Logging In...' : 'Log In →'}
           </button>
         </form>
         
         <div className="auth-footer">
-          Don't have an account? <Link to="/register" className="auth-link">Sign up</Link>
+          Don't have an account? <Link to="/register" className="auth-link">Sign up for free</Link>
         </div>
       </div>
     </div>
