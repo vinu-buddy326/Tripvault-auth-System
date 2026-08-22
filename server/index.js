@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
 const tripRoutes = require('./routes/trips');
+const userRoutes = require('./routes/users');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
+app.use('/api/users', userRoutes);
 
 if (!MONGO_URI) {
   console.error('Missing MONGO_URI in environment. Check server/.env and your environment variables.');

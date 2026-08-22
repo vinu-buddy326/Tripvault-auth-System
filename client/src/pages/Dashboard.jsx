@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import api from '../api/axios';
 import TripCard from '../components/TripCard';
 import TripForm from '../components/TripForm';
+import EditProfileModal from '../components/EditProfileModal';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -11,6 +12,7 @@ const Dashboard = () => {
   const [trips, setTrips] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingTrip, setEditingTrip] = useState(null);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   
   const navigate = useNavigate();
 
@@ -69,6 +71,13 @@ const Dashboard = () => {
     setEditingTrip(null);
   };
 
+  const handleProfileUpdated = (updatedUser) => {
+    setUser((prev) => ({
+      ...prev,
+      ...updatedUser
+    }));
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
@@ -100,10 +109,26 @@ const Dashboard = () => {
 
         <div className="user-badge-group">
           {user && (
-            <div className="user-avatar-chip">
-              <div className="avatar-circle">{getInitial(user.name)}</div>
-              <span className="user-name-text">{user.name}</span>
-            </div>
+            <>
+              <Link 
+                to={`/profile/${user.username}`} 
+                className="btn-secondary" 
+                style={{ textDecoration: 'none', padding: '0.45rem 0.9rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              >
+                🌐 My Profile
+              </Link>
+              <button 
+                onClick={() => setIsEditProfileOpen(true)} 
+                className="btn-secondary" 
+                style={{ padding: '0.45rem 0.9rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              >
+                ✏️ Edit Profile
+              </button>
+              <div className="user-avatar-chip">
+                <div className="avatar-circle">{getInitial(user.name)}</div>
+                <span className="user-name-text">{user.name}</span>
+              </div>
+            </>
           )}
           <button onClick={handleLogout} className="btn-danger">
             Logout
@@ -116,7 +141,14 @@ const Dashboard = () => {
         <div className="dashboard-hero-bar">
           <div className="hero-welcome">
             <h2>Welcome back, <span className="gradient-text-cyan">{user?.name}</span>! 👋</h2>
-            <p>Your personal travel memory vault & adventure journal.</p>
+            <p>
+              Your personal travel memory vault & adventure journal.
+              {user?.username && (
+                <span style={{ display: 'inline-block', marginLeft: '0.5rem', color: '#94a3b8' }}>
+                  (Public Handle: <Link to={`/profile/${user.username}`} style={{ color: '#38bdf8' }}>@{user.username}</Link>)
+                </span>
+              )}
+            </p>
           </div>
           {!isFormOpen && (
             <button onClick={handleCreateNew} className="btn-primary">
@@ -159,6 +191,14 @@ const Dashboard = () => {
           </div>
         )}
       </main>
+
+      {/* Edit Profile Modal */}
+      <EditProfileModal 
+        user={user} 
+        isOpen={isEditProfileOpen} 
+        onClose={() => setIsEditProfileOpen(false)} 
+        onSuccess={handleProfileUpdated}
+      />
     </div>
   );
 };

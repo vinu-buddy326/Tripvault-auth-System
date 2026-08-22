@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import PublicProfile from './pages/PublicProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile/:username" element={<PublicProfile />} />
         <Route 
           path="/dashboard" 
           element={

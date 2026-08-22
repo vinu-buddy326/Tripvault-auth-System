@@ -5,6 +5,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
   email: {
     type: String,
     required: true,
@@ -13,6 +20,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  bio: {
+    type: String,
+    default: '',
   },
 }, { timestamps: true });
 

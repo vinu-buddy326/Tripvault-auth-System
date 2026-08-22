@@ -5,6 +5,7 @@ import axios from 'axios';
 const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
+    username: '',
     email: '',
     password: ''
   });
@@ -13,7 +14,7 @@ const Register = () => {
   
   const navigate = useNavigate();
 
-  const { name, email, password } = formData;
+  const { name, username, email, password } = formData;
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -25,6 +26,7 @@ const Register = () => {
     try {
       const res = await axios.post('http://localhost:5000/api/auth/register', {
         name,
+        username,
         email,
         password
       });
@@ -48,7 +50,7 @@ const Register = () => {
         
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label className="form-label" htmlFor="name">Full Name</label>
+            <label className="form-label" htmlFor="name">Full Name *</label>
             <input 
               type="text" 
               id="name"
@@ -61,7 +63,20 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-            <label className="form-label" htmlFor="email">Email Address</label>
+            <label className="form-label" htmlFor="username">Username *</label>
+            <input 
+              type="text" 
+              id="username"
+              name="username" 
+              value={username} 
+              onChange={onChange} 
+              className="form-input" 
+              required 
+              placeholder="e.g. alex_travels"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="email">Email Address *</label>
             <input 
               type="email" 
               id="email"
@@ -74,7 +89,7 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-            <label className="form-label" htmlFor="password">Password</label>
+            <label className="form-label" htmlFor="password">Password *</label>
             <input 
               type="password" 
               id="password"
