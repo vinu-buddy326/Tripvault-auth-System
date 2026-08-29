@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import api from '../api/axios';
 
 const EditProfileModal = ({ user, isOpen, onClose, onSuccess }) => {
@@ -23,10 +24,13 @@ const EditProfileModal = ({ user, isOpen, onClose, onSuccess }) => {
 
     try {
       const res = await api.put('/users/profile', { username, bio });
+      toast.success('Profile updated successfully! 👤');
       onSuccess(res.data.user);
       onClose();
     } catch (err) {
-      setError(err.response?.data?.msg || err.response?.data?.message || 'Failed to update profile');
+      const errMsg = err.response?.data?.msg || err.response?.data?.message || 'Failed to update profile';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

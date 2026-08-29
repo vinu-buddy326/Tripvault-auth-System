@@ -20,6 +20,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'TripVault API Server is active and healthy.' });
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/users', userRoutes);

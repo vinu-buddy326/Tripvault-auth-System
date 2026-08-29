@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import api from '../api/axios';
 
 const TripForm = ({ trip, onSuccess, onCancel }) => {
@@ -64,12 +65,15 @@ const TripForm = ({ trip, onSuccess, onCancel }) => {
 
     try {
       let savedTrip;
-      if (trip) {
+      let isEdit = !!trip;
+      if (isEdit) {
         const res = await api.put(`/trips/${trip._id}`, formData);
         savedTrip = res.data;
+        toast.success('Travel memory updated successfully! ✏️');
       } else {
         const res = await api.post('/trips', formData);
         savedTrip = res.data;
+        toast.success('New travel memory created! 🗺️');
       }
 
       // If user selected an image file, upload it to Cloudinary
@@ -84,10 +88,10 @@ const TripForm = ({ trip, onSuccess, onCancel }) => {
               'Content-Type': 'multipart/form-data',
             },
           });
+          toast.success('Cover photo uploaded to Cloudinary! 📸');
         } catch (uploadErr) {
           console.error('Image upload failed:', uploadErr);
-          // Show error but still proceed since trip was created
-          alert('Trip saved, but photo upload encountered an issue: ' + (uploadErr.response?.data?.msg || uploadErr.message));
+          toast.error('Trip saved, but photo upload failed: ' + (uploadErr.response?.data?.msg || uploadErr.message));
         } finally {
           setUploadingPhoto(false);
         }
@@ -95,7 +99,9 @@ const TripForm = ({ trip, onSuccess, onCancel }) => {
 
       onSuccess();
     } catch (err) {
-      setError(err.response?.data?.msg || err.response?.data?.message || 'An error occurred. Please try again.');
+      const errMsg = err.response?.data?.msg || err.response?.data?.message || 'An error occurred. Please try again.';
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

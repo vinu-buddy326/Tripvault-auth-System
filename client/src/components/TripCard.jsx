@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import api from '../api/axios';
 
 const TripCard = ({ trip, onEdit, onDeleteSuccess, isPublic = false }) => {
@@ -14,9 +15,11 @@ const TripCard = ({ trip, onEdit, onDeleteSuccess, isPublic = false }) => {
     if (window.confirm(`Are you sure you want to delete "${trip.title}"?`)) {
       try {
         await api.delete(`/trips/${trip._id}`);
+        toast.success(`Deleted "${trip.title}" memory! 🗑️`);
         onDeleteSuccess();
       } catch (err) {
-        alert(err.response?.data?.msg || 'Failed to delete trip.');
+        const errMsg = err.response?.data?.msg || err.response?.data?.message || 'Failed to delete trip.';
+        toast.error(errMsg);
       }
     }
   };
@@ -82,7 +85,7 @@ const TripCard = ({ trip, onEdit, onDeleteSuccess, isPublic = false }) => {
       )}
 
       <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <h3 className="trip-title" style={{ marginTop: trip.coverImage ? 0 : 0 }}>{trip.title}</h3>
+        <h3 className="trip-title">{trip.title}</h3>
 
         <div className="trip-info-pill" style={{ marginTop: '0.5rem', alignSelf: 'flex-start' }}>
           <span>📍</span>
