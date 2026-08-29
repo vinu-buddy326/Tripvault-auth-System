@@ -79,9 +79,6 @@ const EditProfileModal = ({ user, isOpen, onClose, onSuccess }) => {
               required
               placeholder="e.g. alex_travels"
             />
-            <small style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
-              Public profile handle: /profile/{username || 'username'}
-            </small>
           </div>
 
           <div className="form-group" style={{ marginTop: '1rem' }}>

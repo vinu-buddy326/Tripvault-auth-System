@@ -101,11 +101,6 @@ const Dashboard = () => {
               <h2>Welcome back, <span className="gradient-text-cyan">{user?.name}</span>! 👋</h2>
               <p>
                 Your personal travel memory vault & adventure journal.
-                {user?.username && (
-                  <span style={{ display: 'inline-block', marginLeft: '0.5rem', color: '#94a3b8' }}>
-                    (Public Handle: <Link to={`/profile/${user.username}`} style={{ color: '#38bdf8' }}>@{user.username}</Link>)
-                  </span>
-                )}
               </p>
             </div>
             {!isFormOpen && (
