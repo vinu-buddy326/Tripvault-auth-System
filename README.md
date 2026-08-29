@@ -1,24 +1,24 @@
-# ✈️ Vinu — Full Stack MERN Travel Memory Journal
+# ✈️ TripVault — Full Stack MERN Travel Memory Journal
 
-[![Vercel Deployment](https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vinu-travel.vercel.app)
-[![Render Deployment](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://vinu-api.onrender.com)
+[![Vercel Deployment](https://img.shields.io/badge/Frontend-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://tripvault-auth-system.vercel.app/)
+[![Render Deployment](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://tripvault-api.onrender.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.style=for-the-badge)](LICENSE)
 [![CodGen Internship](https://img.shields.io/badge/CodGen-Virtual%20Internship-purple?style=for-the-badge)](https://codgen.in)
 
-> **Vinu** is a modern full-stack (MERN) web application designed to capture, organize, and share your travel memories and adventures. Built with a sleek glassmorphism UI, Cloudinary photo uploads, JWT authentication, and shareable public traveller profiles.
+> **TripVault** is a modern full-stack (MERN) web application designed to capture, organize, and share your travel memories and adventures. Built with a sleek glassmorphism UI, Cloudinary photo uploads, JWT authentication, and shareable public traveller profiles.
 
 ---
 
 ## 🔗 Live Application Links
 
-- 🌐 **Live Web Application (Vercel)**: `https://vinu-travel.vercel.app` *(Replace with your deployed Vercel URL)*
-- ⚡ **Live Backend API (Render)**: `https://vinu-api.onrender.com/api/health` *(Replace with your deployed Render URL)*
+- 🌐 **Live Web Application (Vercel)**: [https://tripvault-auth-system.vercel.app/](https://tripvault-auth-system.vercel.app/)
+- ⚡ **Live Backend API (Render)**: `https://tripvault-api.onrender.com/api/health` *(Replace with your deployed Render URL if needed)*
 
 ---
 
 ## ✨ Features Highlight
 
-- 🔐 **JWT User Authentication**: Secure registration, login, token-based session persistence, password eye toggle icon, and protected routes.
+- 🔐 **JWT User Authentication**: Secure registration, login, token-based session persistence, password eye visibility toggle icon, and protected routes.
 - 🗺️ **Full Trip CRUD**: Create, read, update, and delete travel entries with destination names, dates, notes, and 1-5 star ratings.
 - 📸 **Cloud Photo Uploads**: Seamless image upload to **Cloudinary** for cover photos and trip photo galleries.
 - 🌐 **Public Shareable Profiles**: Shareable public URLs (`/profile/:username`) displaying a user's travel log without requiring login.
@@ -55,7 +55,7 @@
 ## 📁 Repository Directory Structure
 
 ```
-vinu/
+TripVault/
 ├── client/                     # React Frontend Application
 │   ├── public/                 # Static assets & icons
 │   ├── src/
@@ -63,7 +63,7 @@ vinu/
 │   │   │   └── axios.js        # Axios instance configured with base URL
 │   │   ├── components/
 │   │   │   ├── EditProfileModal.jsx
-│   │   │   ├── Footer.jsx      # App Footer (Vinu branding)
+│   │   │   ├── Footer.jsx      # App Footer with CodGen internship info
 │   │   │   ├── LoadingSpinner.jsx
 │   │   │   ├── Navbar.jsx      # Responsive Navbar with mobile hamburger menu
 │   │   │   ├── ProtectedRoute.jsx
@@ -125,7 +125,7 @@ npm install
 Create a `.env` file inside the `server/` folder (or copy from `.env.example`):
 ```env
 PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/vinu?retryWrites=true&w=majority
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/tripvault?retryWrites=true&w=majority
 JWT_SECRET=your_super_secret_jwt_key
 
 # Cloudinary Credentials
@@ -158,7 +158,7 @@ npm run dev
 # App running at http://localhost:5173
 ```
 
-Open your browser and navigate to `http://localhost:5173` to start using Vinu locally!
+Open your browser and navigate to `http://localhost:5173` to start using TripVault locally!
 
 ---
 
@@ -208,7 +208,7 @@ Open your browser and navigate to `http://localhost:5173` to start using Vinu lo
 - [x] **Error Handling**: Graceful error alert messages & toasts on API failures
 - [x] **Toast Notifications**: Integrated `react-toastify` for auth, CRUD, uploads, & profile edits
 - [x] **Empty States**: Clear, encouraging empty state cards when no trips exist
-- [x] **Navbar**: Logo (Vinu), navigation links, avatar chip, and logout button
+- [x] **Navbar**: Logo (TripVault), navigation links, avatar chip, and logout button
 - [x] **Footer**: Developer credits and internship details
 - [x] **Consistent Styling**: Unified dark glassmorphism theme, CSS variables, and fonts
 - [x] **Mobile Responsiveness**: Adaptive layouts tested down to 375px width
@@ -216,7 +216,7 @@ Open your browser and navigate to `http://localhost:5173` to start using Vinu lo
 - [x] **Password Visibility Toggle**: Eye icon show/hide toggle on Login & Register forms
 - [x] **Backend Deployment Ready**: Health check endpoint & env configurations for Render
 - [x] **Frontend Deployment Ready**: Dynamic `VITE_API_URL` environment configuration for Vercel
-- [x] **Professional Documentation**: Comprehensive README with setup guide & API docs
+- [x] **Professional README**: Comprehensive README with setup guide & API docs
 
 ---
 
@@ -224,4 +224,4 @@ Open your browser and navigate to `http://localhost:5173` to start using Vinu lo
 
 This project was built as part of the **CodGen Virtual Internship Program (Full Stack MERN)**.
 
-Created with ❤️ by **Vinu**
+Created with ❤️ for **CodGen Virtual Internship**

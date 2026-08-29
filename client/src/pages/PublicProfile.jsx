@@ -66,7 +66,7 @@ const PublicProfile = () => {
             <h2 className="gradient-text" style={{ marginBottom: '1rem' }}>Profile Not Found</h2>
             <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{error}</p>
             <Link to="/" className="btn-primary" style={{ display: 'inline-block', textDecoration: 'none' }}>
-              ✈️ Go to Vinu Home
+              ✈️ Go to TripVault Home
             </Link>
           </div>
         </div>
@@ -133,7 +133,7 @@ const PublicProfile = () => {
                   </p>
                 ) : (
                   <p style={{ color: '#64748b', marginTop: '0.5rem', fontStyle: 'italic', fontSize: '0.95rem' }}>
-                    Passionate traveler documenting journeys on Vinu.
+                    Passionate traveler documenting journeys on TripVault.
                   </p>
                 )}
 

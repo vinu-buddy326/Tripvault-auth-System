@@ -49,7 +49,7 @@ const Register = () => {
       <div className="auth-page" style={{ flex: 1 }}>
         <div className="glass-container auth-card">
           <div className="auth-header-icon">🌍</div>
-          <h1 className="auth-title gradient-text">Join Vinu</h1>
+          <h1 className="auth-title gradient-text">Join TripVault</h1>
           <p className="auth-subtitle">Create an account to start your adventure journal.</p>
           
           {error && <div className="error-message">⚠️ {error}</div>}

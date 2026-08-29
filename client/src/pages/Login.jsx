@@ -30,7 +30,7 @@ const Login = () => {
         password
       });
       localStorage.setItem('token', res.data.token);
-      toast.success('Welcome back to Vinu! ✈️');
+      toast.success('Welcome back to TripVault! ✈️');
       navigate('/dashboard');
     } catch (err) {
       const errMsg = err.response?.data?.message || err.response?.data?.msg || 'Server error during login';
@@ -47,7 +47,7 @@ const Login = () => {
         <div className="glass-container auth-card">
           <div className="auth-header-icon">✈️</div>
           <h1 className="auth-title gradient-text">Welcome Back</h1>
-          <p className="auth-subtitle">Log in to manage your Vinu travel memories.</p>
+          <p className="auth-subtitle">Log in to manage your TripVault memories.</p>
           
           {error && <div className="error-message">⚠️ {error}</div>}
           

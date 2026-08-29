@@ -20,7 +20,7 @@ const Navbar = ({ user, onEditProfile }) => {
         <Link to={user ? "/dashboard" : "/login"} style={{ textDecoration: 'none' }}>
           <div className="logo-brand">
             <div className="logo-icon">✈️</div>
-            <span className="dashboard-title gradient-text">Vinu</span>
+            <span className="dashboard-title gradient-text">TripVault</span>
           </div>
         </Link>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const LoadingSpinner = ({ message = 'Loading Vinu...' }) => {
+export const LoadingSpinner = ({ message = 'Loading TripVault...' }) => {
   return (
     <div className="auth-page" style={{ minHeight: '60vh' }}>
       <div className="glass-container auth-card" style={{ textAlign: 'center', padding: '3rem 2rem' }}>

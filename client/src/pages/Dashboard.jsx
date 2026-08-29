@@ -82,7 +82,7 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner message="Loading your Vinu memories..." />;
+    return <LoadingSpinner message="Loading your TripVault memories..." />;
   }
 
   return (

@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="app-footer">
       <div className="footer-content" style={{ justifyContent: 'center' }}>
         <p className="footer-text">
-          Vinu &copy; {new Date().getFullYear()} — Built with <span className="heart-icon">❤️</span> for 
+          TripVault &copy; {new Date().getFullYear()} — Built with <span className="heart-icon">❤️</span> for 
           <span className="internship-badge"> CodGen Full Stack Internship</span>
         </p>
       </div>
