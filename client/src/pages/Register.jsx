@@ -11,6 +11,7 @@ const Register = () => {
     email: '',
     password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -48,7 +49,7 @@ const Register = () => {
       <div className="auth-page" style={{ flex: 1 }}>
         <div className="glass-container auth-card">
           <div className="auth-header-icon">🌍</div>
-          <h1 className="auth-title gradient-text">Join TripVault</h1>
+          <h1 className="auth-title gradient-text">Join Vinu</h1>
           <p className="auth-subtitle">Create an account to start your adventure journal.</p>
           
           {error && <div className="error-message">⚠️ {error}</div>}
@@ -95,16 +96,40 @@ const Register = () => {
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="password">Password *</label>
-              <input 
-                type="password" 
-                id="password"
-                name="password" 
-                value={password} 
-                onChange={onChange} 
-                className="form-input" 
-                required 
-                placeholder="Create a strong password"
-              />
+              <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <input 
+                  type={showPassword ? 'text' : 'password'} 
+                  id="password"
+                  name="password" 
+                  value={password} 
+                  onChange={onChange} 
+                  className="form-input" 
+                  style={{ paddingRight: '2.5rem' }}
+                  required 
+                  placeholder="Create a strong password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute',
+                    right: '12px',
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    fontSize: '1.2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '4px'
+                  }}
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
             <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '0.5rem' }} disabled={loading}>
               {loading ? 'Creating Account...' : 'Create Account →'}
